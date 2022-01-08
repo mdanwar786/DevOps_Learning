@@ -1,0 +1,14 @@
+--- # This playbook is to perform the looping 
+- hosts: client
+  connection: ssh
+  become: true
+  gather_facts: no
+  user: ansible
+  tasks:
+    - name: Add list of users 
+      user: name={{ item }} state=present
+      with_items:
+        - Anwar1
+        - Anwar2
+        - Anwar3
+

@@ -1,0 +1,14 @@
+--- #This playbook is to perform both var_prompt and Varibable prompt
+- hosts: client
+  become: true
+  user: ansible
+  gather_facts: no
+  vars_prompt:
+    - name: custname
+      private: no
+      prompt: Enter the user name to get added into Client1 and Client2
+  tasks:
+    - name: Adding the new Custom user into the Client1 and Client2
+      user: name={{ custname }} state=present 
+
+

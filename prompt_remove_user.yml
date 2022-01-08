@@ -1,0 +1,18 @@
+--- #This playbook is to perform both var_prompt and Varibable prompt
+- hosts: client
+  become: true
+  user: ansible
+  gather_facts: no
+  vars_prompt:
+    - name: custname
+      private: no
+      prompt: Enter the user name to get removed from Client1 and Client2
+  tasks:
+    - name: Removing the new Custom user from the Client1 and Client2
+      user: 
+        name: '{{ custname }}' 
+        state: absent 
+        remove: yes
+
+
+
