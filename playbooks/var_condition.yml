@@ -1,0 +1,13 @@
+--- 
+- hosts: localhost
+  connection: ssh
+  gather_facts: no
+  become: true
+  vars:
+          create_file: true
+  tasks:
+    - name: create a new file
+      file:
+              state: touch
+              path: /home/ansible/DevOps_Training/playbooks/variable_was_true
+      when: create_file

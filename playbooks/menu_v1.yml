@@ -1,0 +1,26 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: false
+  tasks:
+    - pause: 
+        prompt: "Main Menu : Enter 1 or 2 "
+      register: main_input
+    - set_fact: 
+        main_var: "{{ main_input.user_input }}"
+    - pause:
+        name: Add_user
+        prompt: "Enter the User name to add"
+        user: 
+          name: "{{ Add_user }}"
+          state: present
+        when: main_var == "1" 
+    - pause:
+        name: Remove_user
+        prompt: "Enter the User name to remove"
+        user:
+          name: "{{ Remove_user }}"
+          state: absent
+          remove: yes
+        when: main_var == "2"
+

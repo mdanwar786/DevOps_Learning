@@ -1,0 +1,16 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: false
+  vars_prompt: 
+    - name: "Options"
+      prompt: "n Choose your option: nn1.Add New User. n2. Remove User"
+      private: no
+    - name: "Add_User"
+      prompt: "n Enter the new user name"
+      private: no
+      user:
+       name: "{{ Add_User }}"
+       state: present
+      when: (Options == "1")
+

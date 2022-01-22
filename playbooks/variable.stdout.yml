@@ -1,0 +1,14 @@
+---
+- hosts: localhost
+  connection: ssh
+  gather_facts: no 
+  tasks:
+    - name: register a variable
+      command: cat /home/ansible/DevOps_Training/playbooks/test.txt 
+      register: motd_contents
+
+    - name: Use the variable in conditional statement
+      debug: 
+        msg: echo "motd contains the word hi"
+      when: motd_contents.stdout.find('hi') != -1
+

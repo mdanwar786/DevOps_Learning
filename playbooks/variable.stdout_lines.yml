@@ -1,0 +1,15 @@
+---
+- hosts: localhost
+  gather_facts: no
+  connection: ssh
+  become: true
+  tasks: 
+    - name: Read the contents of the directory
+      command: ls /home/ansible/DevOps_Training/playbooks
+      register: dir_list
+    - name: add the list of files to another file
+      file:
+        path: /home/ansible/DevOps_Training/playbooks/file_list
+        src: /home/ansible/DevOps_Training/playbooks/
+        state: link 
+      loop: "{{ dir_list.stdout_lines }}"
