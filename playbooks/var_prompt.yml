@@ -1,0 +1,15 @@
+--- #This playbook is to prompt the variable
+- hosts: client
+  become: true
+  connection: ssh
+  gather_facts: no
+  user: ansible
+  vars_prompt:
+    - name: pkg
+      prompt: which package would you like to install?
+  tasks:
+    - name: Installing the {{ pkg }} into the Client1 and Client2
+      yum: name={{ pkg }} state=installed
+
+
+

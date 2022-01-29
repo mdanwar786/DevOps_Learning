@@ -1,0 +1,7 @@
+--- # This playbook is a sample copy operation demo
+- hosts: client
+  tasks:
+   - name: copy a file to client
+     template: src=/home/ansible/test dest=/home/ansible/
+
+

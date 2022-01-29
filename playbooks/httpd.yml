@@ -1,0 +1,20 @@
+--- # This playbook is install,start,remove httpd package
+- hosts: client
+  user: ansible
+  become: true 
+  connection: ssh 
+  gather_facts: no
+  tasks:
+   - name: Installing httpd package in Client1 and Client2
+     ansible.builtin.yum:
+       name: git 
+       state: latest
+     notify: 
+     - Restart httpd
+  
+  handlers:
+    - name: Restart httpd
+      ansible.builtin.service:
+        name: httpd
+        state: restarted
+

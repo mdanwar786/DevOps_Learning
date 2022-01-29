@@ -1,0 +1,11 @@
+---
+ - hosts: localhost
+   become: yes 
+   gather_facts: no
+   tasks:
+     get_url: 
+       url: http://example.com/path/file.conf
+       dest: /home/ansible/DevOps_Training/playbooks/tmp 
+
+
+
