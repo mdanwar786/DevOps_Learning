@@ -7,3 +7,10 @@
       shell: echo "This is a test Code"
     - debug:
         msg: "Shell Command is executed successfully" 
+    - name: install httpd
+      yum: install httpd
+    - name: start the httpd
+      service: httpd
+      state: started
+      
+      
