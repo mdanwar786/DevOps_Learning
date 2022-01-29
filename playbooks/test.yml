@@ -1,0 +1,9 @@
+---
+- hosts: localhost 
+  connection: ssh
+  gather_facts: no
+  tasks:
+    - name: Test yaml
+      shell: echo "This is a test Code"
+    - debug:
+        msg: "Shell Command is executed successfully" 

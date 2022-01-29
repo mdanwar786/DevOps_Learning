@@ -2,15 +2,51 @@
 - hosts: localhost
   connection: local
   gather_facts: false
+  become: true
   vars_prompt: 
-    - name: "Options"
-      prompt: "n Choose your option: nn1.Add New User. n2. Remove User"
+    - name: Option
+      prompt: " \nChoose your option: \n1.Add New User. \n2. Remove User \n3 Exit"
       private: no
-    - name: "Add_User"
-      prompt: "n Enter the new user name"
+      
+    - name: Add_User
+      prompt: "\n Enter the new user name:"
       private: no
-      user:
-       name: "{{ Add_User }}"
-       state: present
-      when: (Options == "1")
+      
+    - name: Remove_User
+      prompt: "\n Enter the Existing user name to remove:"
+      private: no
+
+  tasks:
+     - set_fact:
+         Add_User: "Add_User"
+       when: Option == '1'
+
+     - set_fact:
+         Remove_User: "Remove_User"
+       when: Option == '2'
+     
+     - set_fact:
+         Exit: "Exit"
+       when: Option == '3'
+  
+     - name: Add_User
+       user: 
+         name: Add_User
+         state: present
+       when: Option == '1'
+     - debug:
+         msg: This Operation is to Add the user into this system
+
+     - name: Remove_User
+       user:
+         name: Remove_User
+         state: absent
+       when: Option == '2'
+     - debug:
+         msg: This Operation is to Remove the user into this system
+
+     - name: Exiting from the code
+       when: Option == '3'
+       debug:
+         msg: "Thank you"
 
